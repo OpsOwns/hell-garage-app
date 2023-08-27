@@ -1,1 +1,1 @@
-# HellGarageFrontend
+# hell-garage-app
