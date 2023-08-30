@@ -10,7 +10,7 @@ const App = () => {
           key={key}
           path={route.Path}
           element={
-            <CustomRoute RequiresAuthentication={route.RequiresAuthentication}>
+            <CustomRoute path={route.Path}>
               <route.Page />
             </CustomRoute>
           }

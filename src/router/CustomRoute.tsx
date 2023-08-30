@@ -4,25 +4,17 @@ import Layout from '../component/layout/Layout';
 
 type Props = {
   children: React.ReactNode;
-  RequiresAuthentication: boolean;
+  path: string;
 };
 
-const CustomRoute = (props: Props) => {
+const CustomRoute = ({ children, path }: Props) => {
   const { authenticated } = useAuth();
 
-  if (props.RequiresAuthentication && !authenticated) {
-    return Navigate({ to: '/login' });
+  if (path === '/login') {
+    return authenticated ? <Navigate to="/" /> : children;
   }
 
-  if (!props.RequiresAuthentication && authenticated) {
-    return Navigate({ to: '/' });
-  }
-
-  return authenticated ? (
-    <Layout>{props.children}</Layout>
-  ) : (
-    <>{props.children}</>
-  );
+  return authenticated ? <Layout>{children}</Layout> : <Navigate to="/login" />;
 };
 
 export default CustomRoute;
