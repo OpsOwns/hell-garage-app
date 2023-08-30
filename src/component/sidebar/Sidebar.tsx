@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react';
-import {
-  Drawer,
-  IconButton,
-  ListItemButton,
-  Toolbar,
-  useMediaQuery,
-} from '@mui/material';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Drawer, IconButton, Toolbar, useMediaQuery } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { StyledList, StyledListText } from './sidebar.css';
-import { SideItem, SideItems } from './Sideitems';
+import { StyledList } from './sidebar.css';
 import theme from '../../theme';
+import SidebarListItem from './SidebarListItem';
+import routes from '../../router/routes';
 
-const Sidebar = () => {
-  const location = useLocation();
+const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
   const isMdScreen = useMediaQuery(theme.breakpoints.up('md'));
   const drawerWidth = !isMdScreen ? (isOpen ? 170 : 72) : 170;
+
+  const [expandedItems, setExpandedItems] = useState<number[]>([]);
+
+  const toggleExpand = (index: number) => {
+    setExpandedItems((prevExpandedItems) => {
+      if (prevExpandedItems.includes(index)) {
+        return prevExpandedItems.filter((itemIndex) => itemIndex !== index);
+      } else {
+        return [...prevExpandedItems, index];
+      }
+    });
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -27,22 +32,6 @@ const Sidebar = () => {
       setIsOpen(true);
     }
   }, [isMdScreen]);
-
-  const renderListItem = (item: SideItem, index: number) => (
-    <ListItemButton
-      key={index}
-      component={Link}
-      to={item.Path}
-      selected={location.pathname === item.Path}
-      sx={{
-        '&.Mui-selected': {
-          backgroundColor: theme.palette.primary.light,
-        },
-      }}
-    >
-      <StyledListText primary={item.Text} />
-    </ListItemButton>
-  );
 
   const renderToggleButton = () => (
     <IconButton
@@ -72,8 +61,18 @@ const Sidebar = () => {
       }}
     >
       <Toolbar>{!isMdScreen && renderToggleButton()}</Toolbar>
-      <StyledList>
-        {SideItems.map((item, index) => renderListItem(item, index))}
+      <StyledList theme={theme}>
+        {routes
+          .filter((item) => item.Text !== 'Login')
+          .map((item, index) => (
+            <SidebarListItem
+              key={index}
+              item={item}
+              index={index}
+              expanded={expandedItems.includes(index)}
+              toggleExpand={toggleExpand}
+            />
+          ))}
       </StyledList>
     </Drawer>
   );
