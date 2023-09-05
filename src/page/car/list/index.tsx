@@ -22,6 +22,7 @@ import {
 import { DirectionsCar, AddCircle, Delete, Edit } from '@mui/icons-material';
 
 import carListData from './mock.data.json';
+import theme from '../../../theme';
 
 interface Car {
   id: number;
@@ -49,6 +50,7 @@ const ListCarPage: React.FC = () => {
   });
   const [selectedCar, setSelectedCar] = useState<Car | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [selectedItem, setSelectedItem] = useState(null);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
@@ -95,6 +97,7 @@ const ListCarPage: React.FC = () => {
   const handleOpenDetailsDialog = (car: Car) => {
     setSelectedCar(car);
     setDetailsDialogOpen(true);
+    setSelectedItem(car.id);
   };
 
   const handleCloseDetailsDialog = () => {
@@ -167,7 +170,13 @@ const ListCarPage: React.FC = () => {
         {displayedCarList.map((car) => (
           <ListItem
             key={car.id}
-            button
+            sx={{
+              cursor: 'pointer',
+              backgroundColor:
+                selectedItem === car.id
+                  ? theme.palette.primary.main
+                  : 'transparent',
+            }}
             onClick={() => handleOpenDetailsDialog(car)}
           >
             <ListItemIcon>
@@ -191,24 +200,19 @@ const ListCarPage: React.FC = () => {
             >
               <Edit />
             </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="details"
-              onClick={() => handleOpenDetailsDialog(car)}
-            >
-              Details
-            </IconButton>
           </ListItem>
         ))}
       </List>
 
-      <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <Pagination
-          count={totalPages}
-          page={currentPage}
-          onChange={(_, page) => setCurrentPage(page)}
-          color="primary"
-        />
+      <div style={{ display: 'static', justifyContent: 'center' }}>
+        {totalPages > 1 && (
+          <Pagination
+            count={totalPages}
+            page={currentPage}
+            onChange={(_, page) => setCurrentPage(page)}
+            color="primary"
+          />
+        )}
       </div>
 
       <Dialog
