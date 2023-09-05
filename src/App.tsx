@@ -1,23 +1,8 @@
-import { Route, Routes } from 'react-router-dom';
+import { useRoutes } from 'react-router-dom';
 import routes from './router/routes';
-import CustomRoute from './router/CustomRoute';
 
 const App = () => {
-  return (
-    <Routes>
-      {routes.map((route, key) => (
-        <Route
-          key={key}
-          path={route.Path}
-          element={
-            <CustomRoute path={route.Path}>
-              <route.Page />
-            </CustomRoute>
-          }
-        ></Route>
-      ))}
-    </Routes>
-  );
+  return useRoutes(routes);
 };
 
 export default App;

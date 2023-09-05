@@ -1,0 +1,51 @@
+[
+    {
+      "id": 1,
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2022
+    },
+    {
+      "id": 2,
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2023
+    },
+    {
+      "id": 3,
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2021
+    },
+    {
+      "id": 4,
+      "make": "Toyota",
+      "model": "Camry",
+      "year": 2022
+    },
+    {
+      "id": 5,
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2023
+    },
+    {
+      "id": 6,
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2021
+    },
+    {
+      "id": 7,
+      "make": "Honda",
+      "model": "Civic",
+      "year": 2023
+    },
+    {
+      "id": 8,
+      "make": "Ford",
+      "model": "F-150",
+      "year": 2021
+    }
+  ]
+  

@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { StyledList } from './sidebar.css';
 import theme from '../../theme';
 import SidebarListItem from './SidebarListItem';
-import routes from '../../router/routes';
+import routes, { RouteObject } from '../../router/routes';
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -22,6 +22,18 @@ const Sidebar: React.FC = () => {
       }
     });
   };
+
+  // const filterRoutes = (routes: RouteObject[]) => {
+  //   return routes
+  //     .filter((item) => item.showRoute === undefined || item.showRoute === true)
+  //     .map((item) => {
+  //       if (item.children && item.children.length > 0) {
+  //         // Recursively filter children
+  //         item.children = filterRoutes(item.children);
+  //       }
+  //       return item;
+  //     });
+  // };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -63,7 +75,9 @@ const Sidebar: React.FC = () => {
       <Toolbar>{!isMdScreen && renderToggleButton()}</Toolbar>
       <StyledList theme={theme}>
         {routes
-          .filter((item) => item.Text !== 'Login')
+          .filter(
+            (item) => item.showRoute === undefined || item.showRoute === true
+          )
           .map((item, index) => (
             <SidebarListItem
               key={index}
@@ -71,6 +85,7 @@ const Sidebar: React.FC = () => {
               index={index}
               expanded={expandedItems.includes(index)}
               toggleExpand={toggleExpand}
+              isToggleClicked={isOpen}
             />
           ))}
       </StyledList>
