@@ -1,7 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import { useAuth } from '../../context/AuthContext';
 
-import { LoginBox, LoginContainer, LoginTitle } from './page.css';
+import { LoginBox, LoginContainer, LoginTitle } from './index.css';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {

@@ -1,7 +1,7 @@
 import AuthRoute from './AuthRoute';
-import LoginPage from '../page/login/page';
-import HomePage from '../page/home/page';
-import CarManagmentPage from '../page/car/main';
+import LoginPage from '../page/login';
+import HomePage from '../page/home';
+import CarManagmentPage from '../page/car';
 import React from 'react';
 
 interface RouteObject {

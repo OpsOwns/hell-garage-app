@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Toyota Camry",
+    "model": "LE",
+    "year": 2022,
+    "engine": "2.5L Inline-4",
+    "plate": "ABC 123",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 2,
+    "name": "Honda Civic",
+    "model": "EX",
+    "year": 2021,
+    "engine": "2.0L Inline-4",
+    "plate": "XYZ 789",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 3,
+    "name": "Ford Mustang",
+    "model": "GT",
+    "year": 2023,
+    "engine": "5.0L V8",
+    "plate": "DEF 456",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 4,
+    "name": "Tesla Model 3",
+    "model": "Performance",
+    "year": 2022,
+    "engine": "Electric",
+    "plate": "EFG 789",
+    "fuelType": "Electric"
+  },
+  {
+    "id": 5,
+    "name": "Chevrolet Silverado",
+    "model": "LTZ",
+    "year": 2021,
+    "engine": "5.3L V8",
+    "plate": "HIJ 101",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 6,
+    "name": "Nissan Altima",
+    "model": "SV",
+    "year": 2023,
+    "engine": "2.5L Inline-4",
+    "plate": "KLM 202",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 7,
+    "name": "Audi A4",
+    "model": "Premium",
+    "year": 2022,
+    "engine": "2.0L Inline-4",
+    "plate": "NOP 303",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 8,
+    "name": "Hyundai Sonata",
+    "model": "SE",
+    "year": 2021,
+    "engine": "2.5L Inline-4",
+    "plate": "QRS 404",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 9,
+    "name": "Kia Soul",
+    "model": "LX",
+    "year": 2023,
+    "engine": "2.0L Inline-4",
+    "plate": "TUV 505",
+    "fuelType": "Gasoline"
+  },
+  {
+    "id": 10,
+    "name": "Mazda CX-5",
+    "model": "Grand Touring",
+    "year": 2022,
+    "engine": "2.5L Inline-4",
+    "plate": "WXY 606",
+    "fuelType": "Gasoline"
+  }
+]
