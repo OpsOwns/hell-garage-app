@@ -153,3 +153,6 @@ sketch
 
 # .idea (JetBrains IDE) directory
 .idea/
+
+# Visual Studio Code (VSCode) directory
+.vscode/
