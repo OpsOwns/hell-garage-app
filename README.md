@@ -41,3 +41,20 @@ We used the Roboto font family from Google Fonts to enhance the typography of ou
 ```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
 ```
+
+### React-Cookie
+
+[React-Cookie](https://www.npmjs.com/package/react-cookie) is used for managing cookies in our application, which is important for maintaining user sessions and security.
+```bash
+npm install react-cookie
+```
+
+### Other Dependencies
+In addition to these key packages, we also used various other npm packages to enhance different aspects of the app. You can find the full list of dependencies in our <b>package.json</b> file.
+
+## JWT Tokens for Security
+
+For enhanced security, we employ JWT (JSON Web Tokens) in the Hell Garage App. JWT tokens are used for user authentication and authorization, ensuring that our app remains secure and user data is protected.
+
+## Mock Data
+Please note that the current version of the Hell Garage App is using mock data for demonstration purposes. While the app provides a realistic experience of managing car service operations, the data displayed is not connected to a live database.
