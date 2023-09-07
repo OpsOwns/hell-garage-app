@@ -1,5 +1,5 @@
-import ListCar from '../../component/car/list/ListCar';
-import Header from '../../component/header/Header';
+import ListCar from '../../components/car/list/ListCar';
+import Header from '../../components/header/Header';
 import { StyledBox } from './index.css';
 
 const CarManagmentPage = () => {

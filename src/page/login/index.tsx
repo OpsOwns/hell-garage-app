@@ -1,8 +1,7 @@
-import { Button, TextField } from '@mui/material';
-import { useAuth } from '../../context/AuthContext';
-
-import { LoginBox, LoginContainer, LoginTitle } from './index.css';
-import { useNavigate } from 'react-router-dom';
+import { Button, TextField } from "@mui/material";
+import { useAuth } from "../../context/AuthContext";
+import { LoginBox, LoginContainer, LoginTitle } from "./index.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const { login } = useAuth();
@@ -10,8 +9,8 @@ const LoginPage = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    login('Test');
-    navigate('/');
+    login("Test");
+    navigate("/");
   };
 
   return (
@@ -24,16 +23,16 @@ const LoginPage = () => {
             </LoginTitle>
 
             <TextField
-              margin={'normal'}
-              type={'text'}
+              margin={"normal"}
+              type={"text"}
               variant="outlined"
               label="Login"
               placeholder="Login"
             />
 
             <TextField
-              margin={'normal'}
-              type={'password'}
+              margin={"normal"}
+              type={"password"}
               variant="outlined"
               label="Haslo"
               placeholder="Haslo"

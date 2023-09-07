@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { StyledList } from './sidebar.css';
 import theme from '../../theme';
 import SidebarListItem from './SidebarListItem';
-import routes, { RouteObject } from '../../router/routes';
+import routes from '../../router/routes';
 
 const Sidebar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(true);
