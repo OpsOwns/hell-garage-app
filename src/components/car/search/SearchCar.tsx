@@ -1,6 +1,6 @@
-import React from "react";
-import { TextField, InputAdornment, IconButton } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import React from 'react';
+import { TextField, InputAdornment, IconButton } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 interface SearchCarProps {
   searchTerm: string;
@@ -15,11 +15,11 @@ const SearchCar = ({ searchTerm, handleSearch }: SearchCarProps) => {
       fullWidth
       value={searchTerm}
       onChange={handleSearch}
-      style={{ marginBottom: "16px", marginTop: "5px" }}
+      style={{ marginBottom: '16px', marginTop: '5px' }}
       InputProps={{
         startAdornment: (
           <InputAdornment position="start">
-            <IconButton>
+            <IconButton disabled={true}>
               <SearchIcon />
             </IconButton>
           </InputAdornment>

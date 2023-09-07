@@ -15,6 +15,8 @@ import { Car } from '../models/Car';
 import { StyledFormControl, StyledSelect } from './dialog.css';
 import theme from '../../../theme';
 import { useEffect } from 'react';
+import { DesktopDatePicker } from '@mui/x-date-pickers';
+import dayjs from 'dayjs';
 
 interface ModifyCarDialogProps {
   modifyDialogOpen: boolean;
@@ -106,14 +108,14 @@ const ModifyCarDialog = ({
             </FormHelperText>
           </StyledFormControl>
           <StyledFormControl theme={theme} fullWidth>
-            <InputLabel htmlFor="year">Rok</InputLabel>
-            <Input
-              id="year"
-              type="text"
-              name="year"
-              value={formik.values.year}
-              onChange={formik.handleChange}
-              error={formik.touched.year && Boolean(formik.errors.year)}
+            <DesktopDatePicker
+              label="Rok produkcji"
+              value={dayjs(new Date(formik.values.year, 0, 1))}
+              onChange={(date: any) => {
+                formik.setFieldValue('year', date.$y);
+              }}
+              views={['year']}
+              maxDate={dayjs(Date.now())}
             />
             <FormHelperText error>
               {formik.touched.year && formik.errors.year}
@@ -156,7 +158,6 @@ const ModifyCarDialog = ({
               value={formik.values.fuelType}
               onChange={formik.handleChange}
               error={formik.touched.fuelType && Boolean(formik.errors.fuelType)}
-              autoWidth
             >
               <MenuItem value="Gasoline">Benzyna</MenuItem>
               <MenuItem value="Diesel">Diesel</MenuItem>
@@ -174,7 +175,7 @@ const ModifyCarDialog = ({
               handleCloseModifyDialog();
             }}
           >
-            Cancel
+            Anuluj
           </Button>
           <Button
             type="button"
@@ -184,7 +185,7 @@ const ModifyCarDialog = ({
               formik.handleSubmit();
             }}
           >
-            Modify
+            Zmień
           </Button>
         </DialogActions>
       </form>
