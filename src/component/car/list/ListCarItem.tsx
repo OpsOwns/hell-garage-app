@@ -1,13 +1,10 @@
-import React from 'react';
-import {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  IconButton,
-} from '@mui/material';
-import { DirectionsCar, Delete, Info as InfoIcon } from '@mui/icons-material';
-import { Car } from '../models/Car';
-import EditIcon from '@mui/icons-material/Edit';
+import React from "react";
+import { ListItem, ListItemIcon, ListItemText } from "@mui/material";
+import { DirectionsCar, Delete, Info as InfoIcon } from "@mui/icons-material";
+import { Car } from "../models/Car";
+import EditIcon from "@mui/icons-material/Edit";
+import { StyledIconButton } from "./ListCarItem.css.ts";
+
 interface CarListItemProps {
   car: Car;
   onOpenDeleteDialog: (car: Car) => void;
@@ -30,27 +27,27 @@ const ListCarItem: React.FC<CarListItemProps> = ({
         primary={`${car.name} ${car.model}`}
         secondary={`Tablica: ${car.plate}`}
       />
-      <IconButton
+      <StyledIconButton
         edge="end"
         aria-label="delete"
         onClick={() => onOpenDeleteDialog(car)}
       >
-        <Delete sx={{ color: 'red' }} />
-      </IconButton>
-      <IconButton
+        <Delete sx={{ color: "red" }} />
+      </StyledIconButton>
+      <StyledIconButton
         edge="end"
         aria-label="details"
         onClick={() => onOpenDetailsDialog(car)}
       >
-        <InfoIcon sx={{ color: 'blue' }} />
-      </IconButton>
-      <IconButton
+        <InfoIcon sx={{ color: "blue" }} />
+      </StyledIconButton>
+      <StyledIconButton
         edge="end"
         aria-label="edit"
         onClick={() => onOpenEditDialog(car)}
       >
-        <EditIcon sx={{ color: 'green' }} />
-      </IconButton>
+        <EditIcon sx={{ color: "green" }} />
+      </StyledIconButton>
     </ListItem>
   );
 };

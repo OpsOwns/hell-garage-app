@@ -1,150 +1,197 @@
-import React, { useEffect, useState } from 'react';
-import { Container, List, Button, Pagination } from '@mui/material';
-import { AddCircle } from '@mui/icons-material';
+import React, {useEffect, useState} from 'react';
+import {Container, List, Button, Pagination} from '@mui/material';
+import {AddCircle} from '@mui/icons-material';
 import carListData from '../mock.data.json';
-import { Car } from '../models/Car';
+import {Car} from '../models/Car';
 import ListCarItem from './ListCarItem';
 import SearchCar from '../search/SearchCar';
 import DetailsCarDialog from '../dialog/Details';
 import RemoveCarDialog from '../dialog/Remove';
 import CreateCarDialog from '../dialog/Create';
+import ModifyCarDialog from '../dialog/Modify';
 
 const ITEMS_PER_PAGE = 5;
 
 const ListCar = () => {
-  const [carList, setCarList] = useState<Car[]>(carListData);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
-  const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
-  const [detailsDialogOpen, setDetailsDialogOpen] = useState<boolean>(false);
-  const [carToDeleteId, setCarToDeleteId] = useState<number | null>(null);
-  const [selectedCar, setSelectedCar] = useState<Car | null>(null);
-  const [currentPage, setCurrentPage] = useState<number>(1);
+    const [carList, setCarList] = useState<Car[]>(carListData);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState<boolean>(false);
+    const [createDialogOpen, setCreateDialogOpen] = useState<boolean>(false);
+    const [modifyDialogOpen, setModifyDialogOpen] = useState<boolean>(false);
+    const [detailsDialogOpen, setDetailsDialogOpen] = useState<boolean>(false);
+    const [carToDeleteId, setCarToDeleteId] = useState<number | null>(null);
 
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setSearchTerm(event.target.value);
-    setCurrentPage(1);
-  };
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-  useEffect(() => {
-    // When the search term changes, reset the current page to 1.
-    setCurrentPage(1);
-  }, [searchTerm]);
+    const initialCar: Car = {
+        id: 0,
+        name: '',
+        engine: '',
+        year: 0,
+        model: '',
+        plate: '',
+        fuelType: '',
+    };
 
-  const handleOpenDeleteDialog = (car: Car) => {
-    setSelectedCar(car);
-    setCarToDeleteId(car?.id!);
-    setDeleteDialogOpen(true);
-  };
+    const [selectedCar, setSelectedCar] = useState<Car>(initialCar);
 
-  const handleCloseDeleteDialog = () => {
-    setCarToDeleteId(null);
-    setDeleteDialogOpen(false);
-  };
+    const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        setSearchTerm(event.target.value);
+        setCurrentPage(1);
+    };
 
-  const handleConfirmDelete = async () => {
-    const updatedCarList = carList.filter((car) => car.id !== carToDeleteId);
-    setCarList(updatedCarList);
-    handleCloseDeleteDialog();
-  };
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm]);
 
-  const handleOpenCreateDialog = () => {
-    setCreateDialogOpen(true);
-  };
+    const handleOpenDeleteDialog = (car: Car) => {
+        setSelectedCar(car);
+        setCarToDeleteId(car?.id!);
+        setDeleteDialogOpen(true);
+    };
 
-  const handleCloseCreateDialog = () => {
-    setCreateDialogOpen(false);
-  };
+    const handleCloseDeleteDialog = () => {
+        setCarToDeleteId(null);
+        setDeleteDialogOpen(false);
+    };
 
-  const handleCreateCar = async (car: Car) => {
-    setCarList([...carList, car]);
-    handleCloseCreateDialog();
-  };
+    const handleConfirmDelete = async () => {
+        const updatedCarList = carList.filter((car) => car.id !== carToDeleteId);
+        setCarList(updatedCarList);
+        handleCloseDeleteDialog();
+    };
 
-  const handleOpenDetailsDialog = (car: Car) => {
-    setSelectedCar(car);
-    setDetailsDialogOpen(true);
-  };
+    const handleOpenCreateDialog = () => {
+        setCreateDialogOpen(true);
+    };
 
-  const handleCloseDetailsDialog = () => {
-    setSelectedCar(null);
-    setDetailsDialogOpen(false);
-  };
+    const handleOpenModifyDialog = (car: Car) => {
+        console.log(car);
+        setSelectedCar(car);
+        setModifyDialogOpen(true);
+    };
 
-  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const endIndex = startIndex + ITEMS_PER_PAGE;
+    const handleCloseCreateDialog = () => {
+        setCreateDialogOpen(false);
+    };
 
-  const filteredCarList = carList.filter(
-    (car) =>
-      car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      car.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      car.plate.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+    const handleCloseModifyDialog = () => {
+        setModifyDialogOpen(false);
+    };
 
-  const totalPages = Math.ceil(filteredCarList.length / ITEMS_PER_PAGE);
+    const handleCreateCar = async (car: Car) => {
+        setCarList([...carList, car]);
+        handleCloseCreateDialog();
+    };
 
-  const displayedCarList = filteredCarList.slice(startIndex, endIndex);
+    const handleModifyCar = async (car: Car) => {
+        setSelectedCar(car);
 
-  const shouldHidePagination = totalPages <= 1;
+        const carIndex = carList.findIndex((c) => c.id === car.id);
 
-  return (
-    <Container>
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AddCircle />}
-        onClick={handleOpenCreateDialog}
-        style={{ marginTop: '16px', marginBottom: '10px' }}
-      >
-        Dodaj nowe auto
-      </Button>
+        if (carIndex !== -1) {
+            const updatedCarList = [...carList];
+            updatedCarList[carIndex] = car;
+            setCarList(updatedCarList);
+        } else {
+            setCarList([...carList, car]);
+        }
 
-      <SearchCar searchTerm={searchTerm} handleSearch={handleSearch} />
+        handleCloseModifyDialog();
+    };
 
-      <List>
-        {displayedCarList.map((car) => (
-          <ListCarItem
-            key={car.id}
-            car={car}
-            onOpenDeleteDialog={handleOpenDeleteDialog}
-            onOpenDetailsDialog={handleOpenDetailsDialog}
-            onOpenEditDialog={handleCloseCreateDialog}
-          />
-        ))}
-      </List>
+    const handleOpenDetailsDialog = (car: Car) => {
+        console.log(car);
+        setSelectedCar(car);
+        setDetailsDialogOpen(true);
+    };
 
-      <div style={{ display: 'static', justifyContent: 'center' }}>
-        {!shouldHidePagination && (
-          <Pagination
-            count={totalPages}
-            page={currentPage}
-            onChange={(_, page) => setCurrentPage(page)}
-            color="primary"
-          />
-        )}
-      </div>
+    const handleCloseDetailsDialog = () => {
+        setSelectedCar(initialCar);
+        setDetailsDialogOpen(false);
+    };
 
-      <CreateCarDialog
-        handleCreateCar={handleCreateCar}
-        createDialogOpen={createDialogOpen}
-        handleCloseCreateDialog={handleCloseCreateDialog}
-      />
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
 
-      <DetailsCarDialog
-        detailsDialogOpen={detailsDialogOpen}
-        handleCloseCreateDialog={handleCloseDetailsDialog}
-        selectedCar={selectedCar ?? undefined}
-      />
+    const filteredCarList = carList.filter(
+        (car) =>
+            car.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            car.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            car.plate.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
-      <RemoveCarDialog
-        handleCloseDeleteDialog={handleCloseDeleteDialog}
-        handleConfirmDelete={handleConfirmDelete}
-        deleteDialogOpen={deleteDialogOpen}
-        selectedCar={selectedCar || undefined}
-      />
-    </Container>
-  );
+    const totalPages = Math.ceil(filteredCarList.length / ITEMS_PER_PAGE);
+
+    const displayedCarList = filteredCarList.slice(startIndex, endIndex);
+
+    const shouldHidePagination = totalPages <= 1;
+
+    return (
+        <Container>
+            <Button
+                variant="contained"
+                color="primary"
+                startIcon={<AddCircle/>}
+                onClick={handleOpenCreateDialog}
+                style={{marginTop: '16px', marginBottom: '10px'}}
+            >
+                Dodaj nowe auto
+            </Button>
+
+            <SearchCar searchTerm={searchTerm} handleSearch={handleSearch}/>
+
+            <List>
+                {displayedCarList.map((car) => (
+                    <ListCarItem
+                        key={car.id}
+                        car={car}
+                        onOpenDeleteDialog={handleOpenDeleteDialog}
+                        onOpenDetailsDialog={handleOpenDetailsDialog}
+                        onOpenEditDialog={handleOpenModifyDialog}
+                    />
+                ))}
+            </List>
+
+            <div style={{display: 'static', justifyContent: 'center'}}>
+                {!shouldHidePagination && (
+                    <Pagination
+                        count={totalPages}
+                        page={currentPage}
+                        onChange={(_, page) => setCurrentPage(page)}
+                        color="primary"
+                    />
+                )}
+            </div>
+
+            <CreateCarDialog
+                handleCreateCar={handleCreateCar}
+                createDialogOpen={createDialogOpen}
+                handleCloseCreateDialog={handleCloseCreateDialog}
+            />
+
+            <ModifyCarDialog
+                modifyDialogOpen={modifyDialogOpen}
+                handleModifyCar={handleModifyCar}
+                handleCloseModifyDialog={handleCloseModifyDialog}
+                selectedCar={selectedCar}
+            />
+
+            <DetailsCarDialog
+                detailsDialogOpen={detailsDialogOpen}
+                handleCloseCreateDialog={handleCloseDetailsDialog}
+                selectedCar={selectedCar}
+            />
+
+            <RemoveCarDialog
+                handleCloseDeleteDialog={handleCloseDeleteDialog}
+                handleConfirmDelete={handleConfirmDelete}
+                deleteDialogOpen={deleteDialogOpen}
+                selectedCar={selectedCar}
+            />
+        </Container>
+    );
 };
 
 export default ListCar;

@@ -11,7 +11,7 @@ import { Car } from '../models/Car';
 interface CarDetailsDialogProps {
   detailsDialogOpen: boolean;
   handleCloseCreateDialog: () => void;
-  selectedCar: Car | undefined;
+  selectedCar: Car;
 }
 
 const DetailsCarDialog = ({
