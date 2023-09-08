@@ -7,8 +7,6 @@ import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.tsx';
 import { CookiesProvider } from 'react-cookie';
 import { theme } from './theme.ts';
-import { LocalizationProvider, plPL } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
@@ -17,14 +15,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <AuthProvider>
         <CookiesProvider>
           <ThemeProvider theme={theme}>
-            <LocalizationProvider
-              dateAdapter={AdapterDayjs}
-              localeText={
-                plPL.components.MuiLocalizationProvider.defaultProps.localeText
-              }
-            >
-              <App />
-            </LocalizationProvider>
+            <App />
           </ThemeProvider>
         </CookiesProvider>
       </AuthProvider>

@@ -6,16 +6,15 @@ import {
   InputLabel,
   Input,
   Button,
-  MenuItem,
   FormHelperText,
 } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Car } from '../models/Car';
-import { StyledFormControl, StyledSelect } from './dialog.css';
+import { StyledFormControl } from './dialog.css';
 import theme from '../../../theme';
-import { DesktopDatePicker } from '@mui/x-date-pickers';
-import dayjs from 'dayjs';
+import YearPicker from '../year/YearPicker';
+import FuelTypeDropdown from '../fuel/FuelTypeDropdown';
 
 interface CreateCarDialogProps {
   createDialogOpen: boolean;
@@ -92,19 +91,14 @@ const CreateCarDialog = ({
               {formik.touched.model && formik.errors.model}
             </FormHelperText>
           </StyledFormControl>
+
           <StyledFormControl theme={theme} fullWidth>
-            <DesktopDatePicker
-              label="Rok produkcji"
-              value={dayjs(new Date(formik.values.year, 0, 1))}
-              onChange={(date: any) => {
-                formik.setFieldValue('year', date.$y);
+            <YearPicker
+              value={formik.values.year}
+              onChange={(date: number) => {
+                formik.setFieldValue('year', date);
               }}
-              views={['year']}
-              maxDate={dayjs(Date.now())}
             />
-            <FormHelperText error>
-              {formik.touched.year && formik.errors.year}
-            </FormHelperText>
           </StyledFormControl>
           <StyledFormControl theme={theme} fullWidth>
             <InputLabel htmlFor="engine">Silnik</InputLabel>
@@ -135,19 +129,11 @@ const CreateCarDialog = ({
             </FormHelperText>
           </StyledFormControl>
           <StyledFormControl theme={theme} fullWidth>
-            <InputLabel htmlFor="fuelType">Rodzaj paliwa</InputLabel>
-            <StyledSelect
-              theme={theme}
-              id="fuelType"
-              name="fuelType"
+            <FuelTypeDropdown
               value={formik.values.fuelType}
               onChange={formik.handleChange}
               error={formik.touched.fuelType && Boolean(formik.errors.fuelType)}
-            >
-              <MenuItem value="Gasoline">Benzyna</MenuItem>
-              <MenuItem value="Diesel">Diesel</MenuItem>
-              <MenuItem value="Electric">Eleketryczny</MenuItem>
-            </StyledSelect>
+            />
             <FormHelperText error>
               {formik.touched.fuelType && formik.errors.fuelType}
             </FormHelperText>
