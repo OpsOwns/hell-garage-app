@@ -1,8 +1,9 @@
-import AuthRoute from "./AuthRoute";
-import LoginPage from "../page/login";
-import HomePage from "../page/home";
-import CarManagmentPage from "../page/car";
-import React from "react";
+import AuthRoute from './AuthRoute';
+import LoginPage from '../page/login';
+import HomePage from '../page/home';
+import CarManagmentPage from '../page/car';
+import React from 'react';
+import CarReport from '../page/reports';
 
 export interface RouteObject {
   path: string;
@@ -17,7 +18,7 @@ const createRoute = (
   name: string,
   element: React.ReactNode,
   children?: RouteObject[],
-  showRoute = true,
+  showRoute = true
 ): RouteObject => ({
   path,
   name,
@@ -27,9 +28,10 @@ const createRoute = (
 });
 
 const routes: RouteObject[] = [
-  createRoute("/", "home", <HomePage />),
-  createRoute("/login", "login", <LoginPage />, undefined, false),
-  createRoute("/car", "auta", <CarManagmentPage />),
+  createRoute('/', 'home', <HomePage />),
+  createRoute('/login', 'login', <LoginPage />, undefined, false),
+  createRoute('/car', 'auta', <CarManagmentPage />),
+  createRoute('/report', 'zgłoszenia', <CarReport />),
 ];
 
 export default routes;
