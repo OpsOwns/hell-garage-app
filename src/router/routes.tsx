@@ -28,7 +28,8 @@ const createRoute = (
 });
 
 const routes: RouteObject[] = [
-  createRoute('/', 'home', <HomePage />),
+  createRoute('/', 'strona główna', <HomePage />),
+  createRoute('*', 'strona główna', <HomePage />, undefined, false),
   createRoute('/login', 'login', <LoginPage />, undefined, false),
   createRoute('/car', 'auta', <CarManagmentPage />),
   createRoute('/report', 'zgłoszenia', <CarReport />),

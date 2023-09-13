@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Zadanie 1",
+    "description": "Wymiana oleju silnikowego i filtrowa oleju w samochodzie Ford Focus.",
+    "clientNumber": "+48 123 456 789",
+    "carName": "Ford Focus",
+    "done": false
+  },
+  {
+    "id": 2,
+    "title": "Zadanie 2",
+    "description": "Przegląd techniczny i wymiana oleju w Mazda RX-7.",
+    "clientNumber": "+48 987 654 321",
+    "carName": "Mazda RX-7",
+    "done": true
+  },
+  {
+    "id": 3,
+    "title": "Zadanie 3",
+    "description": "Naprawa układu hamulcowego w Volkswagen Golf.",
+    "clientNumber": "+48 555 555 555",
+    "carName": "Volkswagen Golf",
+    "done": false
+  },
+  {
+    "id": 4,
+    "title": "Zadanie 4",
+    "description": "Wymiana rozrządu i oleju w samochodzie Toyota Camry.",
+    "clientNumber": "+48 111 222 333",
+    "carName": "Toyota Camry",
+    "done": true
+  },
+  {
+    "id": 5,
+    "title": "Zadanie 5",
+    "description": "Diagnostyka awarii i naprawa w samochodzie Honda Civic.",
+    "clientNumber": "+48 444 333 222",
+    "carName": "Honda Civic",
+    "done": false
+  },
+  {
+    "id": 6,
+    "title": "Zadanie 6",
+    "description": "Wymiana amortyzatorów i zawieszenia w Nissan Sentra.",
+    "clientNumber": "+48 999 888 777",
+    "carName": "Nissan Sentra",
+    "done": true
+  },
+  {
+    "id": 7,
+    "title": "Zadanie 7",
+    "description": "Naprawa silnika i wymiana filtrów w Chevrolet Malibu.",
+    "clientNumber": "+48 777 666 555",
+    "carName": "Chevrolet Malibu",
+    "done": false
+  },
+  {
+    "id": 8,
+    "title": "Zadanie 8",
+    "description": "Serwis klimatyzacji i wymiana opon w samochodzie Kia Optima.",
+    "clientNumber": "+48 333 222 111",
+    "carName": "Kia Optima",
+    "done": true
+  },
+  {
+    "id": 9,
+    "title": "Zadanie 9",
+    "description": "Naprawa układu wydechowego i wymiana oleju w Hyundai Elantra.",
+    "clientNumber": "+48 666 777 888",
+    "carName": "Hyundai Elantra",
+    "done": false
+  },
+  {
+    "id": 10,
+    "title": "Zadanie 10",
+    "description": "Wymiana baterii i diagnostyka silnika w Subaru Outback.",
+    "clientNumber": "+48 444 555 666",
+    "carName": "Subaru Outback",
+    "done": true
+  }
+]
