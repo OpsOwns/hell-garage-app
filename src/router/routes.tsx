@@ -4,6 +4,7 @@ import HomePage from '../page/home';
 import CarManagmentPage from '../page/car';
 import React from 'react';
 import CarReport from '../page/reports';
+import Users from '../page/user';
 
 export interface RouteObject {
   path: string;
@@ -33,6 +34,7 @@ const routes: RouteObject[] = [
   createRoute('/login', 'login', <LoginPage />, undefined, false),
   createRoute('/car', 'auta', <CarManagmentPage />),
   createRoute('/report', 'zgłoszenia', <CarReport />),
+  createRoute('/users', 'pracownicy', <Users />),
 ];
 
 export default routes;
