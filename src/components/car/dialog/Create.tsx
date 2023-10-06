@@ -22,12 +22,24 @@ interface CreateCarDialogProps {
   handleCreateCar: (car: Car) => Promise<void>;
 }
 
+const licensePlateValidation = (value: string) => {
+  const regex = /^[A-Z]{2}-\d{3}[A-Z]{2}$/;
+
+  if (!regex.test(value)) {
+    return false;
+  }
+
+  return true;
+};
+
 const validationSchema = Yup.object({
   name: Yup.string().required('Nazwa jest wymagane'),
   model: Yup.string().required('Model jest wymagany'),
   year: Yup.number().required('Rocznik jest wymagany').positive().integer(),
   engine: Yup.string().required('Silnik jest wymagany'),
-  plate: Yup.string().required('Tablice rejestracyjne są wymagane'),
+  plate: Yup.string()
+    .required('Tablice rejestracyjne są wymagane')
+    .test('license-plate', 'Invalid license plate', licensePlateValidation),
   fuelType: Yup.string().required('Wybierz typ paliwa'),
 });
 

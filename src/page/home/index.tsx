@@ -41,7 +41,27 @@ const HomePage = () => {
 
       <Grid container spacing={2} marginTop={2} className="task-list-container">
         {tasksToShow.map((task) => (
-          <Card key={task.id} variant="outlined" className="task-card">
+          <Card
+            key={task.id}
+            variant="outlined"
+            className={`task-card ${task.done ? 'task-card-done' : ''}`}
+            onMouseEnter={() => {
+              if (!task.done) {
+                const card = document.getElementById(`task-card-${task.id}`);
+                if (card) {
+                  card.classList.add('task-card-hovered');
+                }
+              }
+            }}
+            onMouseLeave={() => {
+              if (!task.done) {
+                const card = document.getElementById(`task-card-${task.id}`);
+                if (card) {
+                  card.classList.remove('task-card-hovered');
+                }
+              }
+            }}
+          >
             <CardContent style={{ display: 'flex', flexDirection: 'column' }}>
               <ListItemText>
                 <Typography
